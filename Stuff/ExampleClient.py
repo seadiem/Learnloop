@@ -25,8 +25,8 @@ class Socket:
     #     self.s.connect((HOST, PORT))
     def send(self, data = ""):
         self.s.sendall(data.encode())
-        size = 2 * 5000
-        out = self.s.recv(size)
+ #       out = self.s.recv(1024*100)
+        out = self.s.recv(1024)
         return out
     def close(self):
         self.s.close()

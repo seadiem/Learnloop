@@ -2,7 +2,7 @@
 import socket
 import os
 
-def socketrun():
+def socketrun(handler):
     SOCKET_FILE = '/Users/imac/Documents/Misc/Learn/Shared/pythonserver'
 
     if os.path.exists(SOCKET_FILE):
@@ -21,7 +21,7 @@ def socketrun():
     print 'Connected by', addr
     while 1:
         try:
-            data = conn.recv(1024)
+            data = conn.recv(1024 * 10)
         except:
             conn.close()
             s.close()
@@ -31,6 +31,8 @@ def socketrun():
             if data == "DONE": break
             if not data: break
             conn.sendall("He he".encode('utf-8'))
+            set = handler(data)
+            return set
     print("now end")
     conn.close()
     s.close()
